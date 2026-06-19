@@ -57,7 +57,6 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'code' => 'required|string|unique:employees,code',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
             'phone' => 'required|string|unique:employees,phone',
@@ -70,7 +69,10 @@ class EmployeesController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $employee = Employees::create($request->all());
+        $latestEmployee = Employees::orderBy('id', 'desc')->first();
+        $code = $latestEmployee ? 'Kar-' . ($latestEmployee->id + 1) : 'Kar-10001';
+
+        $employee = Employees::create(array_merge($request->all(), ['code' => $code]));
 
         return response()->json([
             'message' => 'Pegawai berhasil ditambahkan.',
@@ -98,7 +100,6 @@ class EmployeesController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'code' => 'required|string|unique:employees,code,' . $id,
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $id,
             'phone' => 'required|string|unique:employees,phone,' . $id,

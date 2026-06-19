@@ -9,10 +9,14 @@ class EmployeesFactory extends Factory
 {
     protected $model = Employees::class;
 
+    protected static $sequence = 1;
+
     public function definition(): array
     {
+        $code = 'Kar-' . str_pad(self::$sequence++, 5, '0', STR_PAD_LEFT);
+
         return [
-            'code' => 'EMP-' . $this->faker->unique()->numberBetween(10000, 99999),
+            'code' => $code,
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->unique()->phoneNumber(),

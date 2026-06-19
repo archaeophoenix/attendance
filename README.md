@@ -29,9 +29,9 @@ Endpoint ini dilengkapi dengan fitur pencarian dan *pagination* dinamis.
 | Method | Endpoint | Fungsi | Query Parameter (Opsional) |
 | :--- | :--- | :--- | :--- |
 | **GET** | `/employees` | Ambil daftar pegawai | `page`, `per_page`, `search`, `status`, `position` |
-| **POST** | `/employees` | Tambah pegawai baru | *Payload JSON Data Pegawai* |
+| **POST** | `/employees` | Tambah pegawai baru | `{ "name": "Jane Doe", "email": "jane@example.com", "phone": "08129876543", "position": "Staff" / "Admin", "status": "Active" / "Inactive", "join_date": "2026-06-19" }` |
 | **GET** | `/employees/{id}` | Detail info satu pegawai | *None* |
-| **PUT** | `/employees/{id}` | Perbarui data pegawai | *Payload JSON Data Pegawai* |
+| **PUT** | `/employees/{id}` | Perbarui data pegawai | `{ "name": "Jane Doe", "email": "jane@example.com", "phone": "08129876543", "position": "Staff" / "Admin", "status": "Active" / "Inactive", "join_date": "2026-06-19" }` |
 | **DELETE**| `/employees/{id}` | Hapus pegawai (Soft Delete) | *None* |
 
 > 💡 **Contoh Paging Dinamis:** `/api/employees?page=1&per_page=25&search=John&status=Active`
